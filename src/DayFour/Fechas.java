@@ -32,31 +32,34 @@ public class Fechas {
 
     }
 
+    //Calcula los dias entre dos fechas sin considerar los fines de semana
     public static float obtenerDiasLaborablesEntre(String fechaInicio, String fechaFin) throws ParseException{
         LocalDate fechaIn = LocalDate.parse(fechaInicio, DateTimeFormatter.ofPattern("d/M/yyyy") );
         LocalDate fechaFi = LocalDate.parse(fechaFin, DateTimeFormatter.ofPattern("d/M/yyyy") );
-        float noOfDaysBetween = (int)ChronoUnit.DAYS.between(fechaIn, fechaFi); 
+        float noOfDaysBetween = (int)ChronoUnit.DAYS.between(fechaIn, fechaFi); //obtiene los dias entre fechas
         LocalDate newDate = fechaIn;
         int weekendDays=0;
-        do{
+        do{ //Cuenta los dias sabados y domingos existentes entre las dos fechas
             if(newDate.getDayOfWeek().toString().equalsIgnoreCase("SATURDAY") ||
                newDate.getDayOfWeek().toString().equalsIgnoreCase("SUNDAY")){
                weekendDays++; 
             }
             newDate = newDate.plusDays(1);
         }while(newDate.isBefore(fechaFi) || newDate.equals(fechaFi));
-        noOfDaysBetween-=weekendDays;
+        noOfDaysBetween-=weekendDays;   //Disminuye de los dias totales los dias que corresponden a un fin de semana
         return noOfDaysBetween;
     }
     
+    //Verifica que el tiempo a distribuir sea menor o igual que el que se dispone y calcula la distribución
     public static void distribuirHoras(float dias, float horas){
         float distSegundos=0;
-        if(horas<dias*24){
+        if(horas<=dias*24){
             distSegundos=horas*60*60/(dias);
             System.out.println(CalcularTiempo((int)distSegundos));
         }
     }   
     
+    //Convierte los segundos en formato horas, minutos, segundos
     private static String CalcularTiempo(int tsegundos){
         int horas = (tsegundos / 3600);
         int minutos = ((tsegundos-horas*3600)/60);
