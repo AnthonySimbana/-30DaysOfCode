@@ -18,7 +18,7 @@ public class Fechas {
         Scanner s = new Scanner(System.in);
         System.out.println("Ingrese la fecha de inicio en formato: dd/mm/yyyy");
         String fechaInicial = s.nextLine();
-        System.out.println("Ingrese la fecha de inicio en formato: dd/mm/yyyy");
+        System.out.println("Ingrese la fecha de fin en formato: dd/mm/yyyy");
         String fechaFinal = s.nextLine();
         System.out.println("Numero de horas a distribuir entre estas fechas");
         String horas = s.nextLine();
